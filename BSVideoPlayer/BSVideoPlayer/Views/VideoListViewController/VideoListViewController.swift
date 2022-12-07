@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Kingfisher
 
 class VideoListViewController: UIViewController {
 
@@ -71,20 +72,20 @@ extension VideoListViewController {
         guard let url = URL(string: url ?? "") else {
             return
         }
-        
-        DispatchQueue.global().async {
-            let asset = AVAsset(url: url)
-            let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
-            assetImgGenerate.appliesPreferredTrackTransform = true
-            let time = CMTime(seconds: Double(1), preferredTimescale: 2)//CMTimeMake(value: 1, timescale: 2)
-            let img = try? assetImgGenerate.copyCGImage(at: time, actualTime: nil)
-            if img != nil {
-                let frameImg  = UIImage(cgImage: img!)
-                DispatchQueue.main.async(execute: {
-                    cell.thumbIma.image = frameImg
-                })
-            }
-        }
+        cell.thumbIma.kf.setImage(with: AVAssetImageDataProvider(assetURL: url, seconds: 1))
+//        DispatchQueue.global().async {
+//            let asset = AVAsset(url: url)
+//            let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+//            assetImgGenerate.appliesPreferredTrackTransform = true
+//            let time = CMTime(seconds: Double(1), preferredTimescale: 2)//CMTimeMake(value: 1, timescale: 2)
+//            let img = try? assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+//            if img != nil {
+//                let frameImg  = UIImage(cgImage: img!)
+//                DispatchQueue.main.async(execute: {
+//                    cell.thumbIma.image = frameImg
+//                })
+//            }
+//        }
     }
     
 }

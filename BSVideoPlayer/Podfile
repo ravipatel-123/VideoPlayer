@@ -6,6 +6,7 @@ target 'BSVideoPlayer' do
   use_frameworks!
 
   # Pods for BSVideoPlayer
+ pod 'Kingfisher', '~> 7.0'
 
 
 
